@@ -3,8 +3,8 @@ function randomInteger(min, max) {
     // eslint-disable-next-line no-alert
     alert('Ошибка');
   } else {
-    const rand = min + Math.random() * (max + 1 - min);
-    return Math.floor(rand);
+    const integerNumber = min + Math.random() * (max + 1 - min);
+    return Math.floor(integerNumber);
   }
 }
 
@@ -13,8 +13,8 @@ function randomFloat(min, max) {
     // eslint-disable-next-line no-alert
     alert('Ошибка');
   } else {
-    const rand = min + Math.random() * (max + 1 - min);
-    return rand.toFixed(1);
+    const floatNumber = min + Math.random() * (max + 1 - min);
+    return floatNumber.toFixed(1);
   }
 }
 randomInteger(1, 5);
