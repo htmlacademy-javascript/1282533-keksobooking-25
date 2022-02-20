@@ -1,5 +1,5 @@
 function randomInteger(min, max) {
-  if (min === max || min > max || min < 0) {
+  if (min >= max || min < 0) {
     // eslint-disable-next-line no-alert
     alert('Ошибка');
   } else {
@@ -9,7 +9,7 @@ function randomInteger(min, max) {
 }
 
 function randomFloat(min, max) {
-  if (min === max || min > max || min < 0) {
+  if (min >= max || min < 0) {
     // eslint-disable-next-line no-alert
     alert('Ошибка');
   } else {
