@@ -1,21 +1,19 @@
-function randomInteger(min, max) {
+function getRandomInteger(min, max) {
   if (min >= max || min < 0) {
     // eslint-disable-next-line no-alert
     alert('Ошибка');
   } else {
-    const integerNumber = min + Math.random() * (max + 1 - min);
-    return Math.floor(integerNumber);
+    return Math.floor(min + Math.random() * (max + 1 - min));
   }
 }
 
-function randomFloat(min, max) {
+function getRandomFloat(min, max) {
   if (min >= max || min < 0) {
     // eslint-disable-next-line no-alert
     alert('Ошибка');
   } else {
-    const floatNumber = min + Math.random() * (max + 1 - min);
-    return floatNumber.toFixed(1);
+    return (min + Math.random() * (max - min)).toFixed(1);
   }
 }
-randomInteger(1, 5);
-randomFloat (1, 5);
+getRandomInteger(1, 5);
+getRandomFloat (1, 5);
