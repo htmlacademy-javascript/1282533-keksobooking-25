@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
-const PLACEANDTIME = {
+const ARRAY_USERS_COUNT = 10;
+
+const PLACE_AND_TIME = {
   apartments:
   [
     'palace',
@@ -106,11 +108,11 @@ const createUser = () => ({
     title: 'Какой-то заголовок',
     address: 'Спросить на консультации',
     price: getRandomInteger(1000, 10000),
-    type: getOneOfMany(1, 5, PLACEANDTIME.apartments),
+    type: getOneOfMany(1, 5, PLACE_AND_TIME.apartments),
     rooms: getRandomInteger(1, 6),
     guests: getRandomInteger(1, 20),
-    checkin: getOneOfMany(1, 3, PLACEANDTIME.time),
-    checkout: getOneOfMany(1, 3, PLACEANDTIME.time),
+    checkin: getOneOfMany(1, 3, PLACE_AND_TIME.time),
+    checkout: getOneOfMany(1, 3, PLACE_AND_TIME.time),
     features: getArrayRandomValues(FACILITIES.additions),
     description: 'Какое-то описание',
     photos: getArrayRandomValues(FACILITIES.interior),
@@ -121,4 +123,6 @@ const createUser = () => ({
   }
 });
 
-console.log(createUser());
+const createArrayUsers = Array.from({length: ARRAY_USERS_COUNT}, createUser);
+
+console.log(createArrayUsers);
