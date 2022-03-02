@@ -53,19 +53,19 @@ const getRandomFloat = (min = 1, max = 5, digits = 1) => {
   return +floatNumber;
 };
 
+const latitude = getRandomFloat(35.65, 35.7, 5);
+const longitude = getRandomFloat(139.7, 139.8, 5);
+
 const getNumberImg = (arrayLength = 10) => {
   const numbersImg = [...Array(Math.abs(arrayLength)).keys()];
   const addZero = numbersImg.map((currentValue) => {
     currentValue = (currentValue + 1).toString();
-    if (currentValue !== 0 && currentValue < 10) {
-      currentValue = `0${currentValue}`;
-    }
-    return currentValue;
+    return currentValue.padStart(2, '0');
   });
   return addZero;
 };
 
-const getAddressImg = () => {
+const getAvatar = () => {
   const addressImg = getNumberImg().map((currentValue) => {
     currentValue = `img/avatars/user${currentValue}.png`;
     return currentValue;
@@ -102,11 +102,14 @@ const getArrayRandomValues = (value) => {
 
 const createUser = () => ({
   author: {
-    avatar: getAddressImg(),
+    avatar: getOneOfMany(1, 10, getAvatar()),
   },
   offer: {
     title: 'Какой-то заголовок',
-    address: 'Спросить на консультации',
+    address: {
+      lat: latitude,
+      lng: longitude,
+    },
     price: getRandomInteger(1000, 10000),
     type: getOneOfMany(1, 5, PLACE_AND_TIME.apartments),
     rooms: getRandomInteger(1, 6),
@@ -118,8 +121,8 @@ const createUser = () => ({
     photos: getArrayRandomValues(FACILITIES.interior),
   },
   location: {
-    lat: getRandomFloat(35.65, 35.7, 5),
-    lng: getRandomFloat(139.7, 139.8, 5),
+    lat: latitude,
+    lng: longitude,
   }
 });
 
