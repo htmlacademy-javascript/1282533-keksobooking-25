@@ -79,7 +79,7 @@ const getOneOfMany = (min, max, value) => {
 };
 
 const getRandomArray = (value) => {
-  const arrayOfArbitraryLength = [...Array(getRandomInteger(0, value.length))];
+  const arrayOfArbitraryLength = Array(getRandomInteger(0, value.length));
   for (let i = 0; i < arrayOfArbitraryLength.length; i++) {
     const randomNumber = getRandomInteger(0, arrayOfArbitraryLength.length);
     if (!arrayOfArbitraryLength.includes(randomNumber)) {
