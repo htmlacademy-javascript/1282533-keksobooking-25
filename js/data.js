@@ -1,5 +1,5 @@
 import {ARRAY_USERS_COUNT, PLACE_AND_TIME, FACILITIES} from './constants.js';
-import {getRandomInteger, getNumberImg, getRandomArray, longitude, latitude} from './until.js';
+import {getRandomInteger, getNumberImg, getRandomArray, longitude, latitude} from './util.js';
 
 const getAvatar = () => {
   const addressImg = getNumberImg().map((currentValue) => {
