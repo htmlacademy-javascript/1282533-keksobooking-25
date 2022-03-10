@@ -24,25 +24,22 @@ const getArrayRandomValues = (value) => {
   return filteredArray;
 };
 
-const createUser = () => ({
+const createAdvertisement = () => ({
   author: {
     avatar: getOneOfMany(1, 10, getAvatar()),
   },
   offer: {
     title: 'Какой-то заголовок',
-    address: {
-      lat: latitude,
-      lng: longitude,
-    },
+    address: `${latitude} ${latitude}`,
     price: getRandomInteger(1000, 10000),
     type: getOneOfMany(1, 5, PLACE_AND_TIME.apartments),
-    rooms: getRandomInteger(1, 6),
+    rooms: getRandomInteger(1, 10),
     guests: getRandomInteger(1, 20),
     checkin: getOneOfMany(1, 3, PLACE_AND_TIME.time),
     checkout: getOneOfMany(1, 3, PLACE_AND_TIME.time),
     features: getArrayRandomValues(FACILITIES.additions),
     description: 'Какое-то описание',
-    photos: getArrayRandomValues(FACILITIES.interior),
+    photos: getOneOfMany(1, 3, FACILITIES.interior),
   },
   location: {
     lat: latitude,
@@ -50,6 +47,6 @@ const createUser = () => ({
   }
 });
 
-const createArrayUsers = () => Array.from({length: ARRAY_USERS_COUNT}, createUser);
+const createArrayAdvertisement = () => Array.from({length: ARRAY_USERS_COUNT}, createAdvertisement);
 
-export {createArrayUsers};
+export {createArrayAdvertisement};
