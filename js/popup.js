@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import {createArrayAdvertisement} from './data.js';
-import {getPlace, getRooms, getGuests} from './util.js';
+import {getPlaceText, getRoomsText, getGuestsText} from './util.js';
 
 console.log(createArrayAdvertisement());
 
@@ -17,8 +17,8 @@ advertisement.forEach(({author, offer, location}) => {
   popupClone.querySelector('.popup__title').textContent = offer.title;
   popupClone.querySelector('.popup__text--address').textContent = offer.address;
   popupClone.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
-  popupClone.querySelector('.popup__type').textContent = getPlace(offer.type);
-  popupClone.querySelector('.popup__text--capacity').textContent = `${offer.rooms} ${getRooms(offer.rooms)} для ${offer.guests} ${getGuests(offer.guests)}`;
+  popupClone.querySelector('.popup__type').textContent = getPlaceText(offer.type);
+  popupClone.querySelector('.popup__text--capacity').textContent = `${offer.rooms} ${getRoomsText(offer.rooms)} для ${offer.guests} ${getGuestsText(offer.guests)}`;
   popupClone.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
   popupClone.querySelector('.popup__description').textContent = offer.description;
   popupClone.querySelector('.popup__photo').src = offer.photos;

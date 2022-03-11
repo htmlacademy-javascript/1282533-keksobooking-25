@@ -39,7 +39,7 @@ const getRandomArray = (value) => {
   return filteredArray;
 };
 
-const getPlace = (place) => {
+const getPlaceText = (place) => {
   switch (place) {
     case 'palace':
       return 'Дворец';
@@ -56,7 +56,7 @@ const getPlace = (place) => {
   }
 };
 
-const getRooms = (rooms) => {
+const getRoomsText = (rooms) => {
   switch (rooms) {
     case 1:
       return 'комната';
@@ -76,7 +76,7 @@ const getRooms = (rooms) => {
   }
 };
 
-const getGuests = (guests) => {
+const getGuestsText = (guests) => {
   let word;
   if (guests === 1) {
     word = 'гостя';
@@ -86,4 +86,4 @@ const getGuests = (guests) => {
   return word;
 };
 
-export{getRandomInteger, getNumberImg, getRandomArray, getPlace, getRooms, getGuests, longitude, latitude};
+export{getRandomInteger, getNumberImg, getRandomArray, getPlaceText, getRoomsText, getGuestsText, longitude, latitude};
