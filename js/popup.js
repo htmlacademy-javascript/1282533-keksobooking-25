@@ -31,9 +31,10 @@ advertisement.forEach(({author, offer, location}) => {
 
     if (modifiers.length === 0) {
       featureListItem.remove();
+      return;
     }
 
-    if (modifiers.includes(modifier)) {
+    if (!modifiers.includes(modifier)) {
       featureListItem.remove();
     }
   });
