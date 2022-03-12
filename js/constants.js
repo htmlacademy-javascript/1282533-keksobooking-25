@@ -1,4 +1,5 @@
-const ARRAY_USERS_COUNT = 10;
+// Поменять обратно на 10, 3 поставил просто для лучшей визуализации
+const ARRAY_USERS_COUNT = 3;
 
 const PLACE_AND_TIME = {
   apartments:
