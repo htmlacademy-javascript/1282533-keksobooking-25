@@ -1,5 +1,5 @@
-const fieldset = document.querySelectorAll('fieldset');
-const select = document.querySelectorAll('select');
+const allFieldset = document.querySelectorAll('fieldset');
+const allSelect = document.querySelectorAll('select');
 const mapFilters = document.querySelector('.map__filters');
 const adForm = document.querySelector('.ad-form');
 
@@ -7,11 +7,11 @@ const getDisabledForm = () => {
   mapFilters.classList.add('map__filters--disabled');
   adForm.classList.add('ad-form--disabled');
 
-  fieldset.forEach((currentValue) => {
+  allFieldset.forEach((currentValue) => {
     currentValue.setAttribute('disabled', 'disabled');
   });
 
-  select.forEach((currentValue) => {
+  allSelect.forEach((currentValue) => {
     currentValue.setAttribute('disabled', 'disabled');
   });
 };
@@ -20,11 +20,11 @@ const getActiveForm = () => {
   mapFilters.classList.remove('map__filters--disabled');
   adForm.classList.remove('ad-form--disabled');
 
-  fieldset.forEach((currentValue) => {
+  allFieldset.forEach((currentValue) => {
     currentValue.removeAttribute('disabled');
   });
 
-  select.forEach((currentValue) => {
+  allSelect.forEach((currentValue) => {
     currentValue.removeAttribute('disabled');
   });
 };
