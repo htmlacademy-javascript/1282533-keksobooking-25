@@ -1,35 +1,35 @@
-const allFieldset = document.querySelectorAll('fieldset');
-const allSelect = document.querySelectorAll('select');
-const mapFilters = document.querySelector('.map__filters');
+const fieldsets = document.querySelectorAll('fieldset');
+const selects = document.querySelectorAll('select');
+const mapFiltersArea = document.querySelector('.map__filters');
 const adForm = document.querySelector('.ad-form');
 
-const getDisabledForm = () => {
-  mapFilters.classList.add('map__filters--disabled');
+const disabledFormPage = () => {
+  mapFiltersArea.classList.add('map__filters--disabled');
   adForm.classList.add('ad-form--disabled');
 
-  allFieldset.forEach((currentValue) => {
+  fieldsets.forEach((currentValue) => {
     currentValue.setAttribute('disabled', 'disabled');
   });
 
-  allSelect.forEach((currentValue) => {
+  selects.forEach((currentValue) => {
     currentValue.setAttribute('disabled', 'disabled');
   });
 };
 
-const getActiveForm = () => {
-  mapFilters.classList.remove('map__filters--disabled');
+const activeFormPage = () => {
+  mapFiltersArea.classList.remove('map__filters--disabled');
   adForm.classList.remove('ad-form--disabled');
 
-  allFieldset.forEach((currentValue) => {
+  fieldsets.forEach((currentValue) => {
     currentValue.removeAttribute('disabled');
   });
 
-  allSelect.forEach((currentValue) => {
+  selects.forEach((currentValue) => {
     currentValue.removeAttribute('disabled');
   });
 };
 
-getDisabledForm();
-// getActiveForm();
+disabledFormPage();
+// activeFormPage();
 
-export {getDisabledForm, getActiveForm};
+export {disabledFormPage, activeFormPage};
