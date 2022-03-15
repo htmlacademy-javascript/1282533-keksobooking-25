@@ -3,7 +3,7 @@ const selects = document.querySelectorAll('select');
 const mapFiltersArea = document.querySelector('.map__filters');
 const adForm = document.querySelector('.ad-form');
 
-const disabledFormPage = () => {
+const disablePageForm = () => {
   mapFiltersArea.classList.add('map__filters--disabled');
   adForm.classList.add('ad-form--disabled');
 
@@ -16,7 +16,7 @@ const disabledFormPage = () => {
   });
 };
 
-const activeFormPage = () => {
+const activatePageForm = () => {
   mapFiltersArea.classList.remove('map__filters--disabled');
   adForm.classList.remove('ad-form--disabled');
 
@@ -29,7 +29,7 @@ const activeFormPage = () => {
   });
 };
 
-disabledFormPage();
-// activeFormPage();
+disablePageForm();
+// activatePageForm();
 
-export {disabledFormPage, activeFormPage};
+export {disablePageForm, activatePageForm};
