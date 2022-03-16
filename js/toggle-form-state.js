@@ -30,6 +30,6 @@ const activatePageForm = () => {
 };
 
 disablePageForm();
-// activatePageForm();
+activatePageForm();
 
-export {disablePageForm, activatePageForm};
+export {disablePageForm, activatePageForm, adForm};
