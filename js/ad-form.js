@@ -27,39 +27,26 @@ const roomsOption = {
   '100': '0'
 };
 
-function validateRooms () {
+function validateRoom () {
   return roomsOption[numberRooms.value].includes(numberGuests.value);
 }
 
-const getRoomText = () => {
-  switch (numberRooms.value) {
-    case '1':
-      return 'комната';
-    case '2':
-    case '3':
-      return 'комнаты';
-    case '100':
-      return 'комнат';
-  }
-};
-
-const getGuestText = () => {
-  switch (numberGuests.value) {
-    case '3':
-    case '2':
-    case '0':
-      return 'гостей';
-    case '1':
-      return 'гостя';
-  }
-};
-
 function getRoomsErrorMessage () {
-  return `${numberRooms.value} ${getRoomText()} не для ${numberGuests.value} ${getGuestText()}`;
+  if (numberRooms.value === '1') {
+    return `${numberRooms.value} комната только для 1 гостя`;
+  }
+  if (numberRooms.value === '2') {
+    return `${numberRooms.value} комнаты не больше 2х гостей`;
+  }
+  if (numberRooms.value === '3') {
+    return `${numberRooms.value} комнаты не больше 3х гостей`;
+  }
+  if (numberRooms.value === '100') {
+    return `${numberRooms.value} комнат не для гостей`;
+  }
 }
 
-// pristine.addValidator(numberRooms, validateRooms, getRoomsErrorMessage);
-pristine.addValidator(numberGuests, validateRooms, getRoomsErrorMessage);
+pristine.addValidator(numberGuests, validateRoom, getRoomsErrorMessage);
 
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
