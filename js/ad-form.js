@@ -72,38 +72,13 @@ pristine.addValidator(apartmentType, apartmentPrice, apartmentErrorText);
 const timeIn = adForm.querySelector('#timein');
 const timeOut = adForm.querySelector('#timeout');
 
-//Костыль
-timeOut.setAttribute('disabled', 'disabled');
-
-timeIn.addEventListener('change', () => {
-  timeOut[0].removeAttribute('selected', 'selected');
-  if (timeIn.value === '12:00') {
-    timeOut[0].setAttribute('selected', 'selected');
-  }
-  timeOut[1].removeAttribute('selected', 'selected');
-  if (timeIn.value === '13:00') {
-    timeOut[1].setAttribute('selected', 'selected');
-  }
-  timeOut[2].removeAttribute('selected', 'selected');
-  if (timeIn.value === '14:00') {
-    timeOut[2].setAttribute('selected', 'selected');
-  }
+timeIn.addEventListener('change', (evt) => {
+  timeOut.value = evt.target.value;
 });
 
-// timeOut.addEventListener('change', () => {
-//   timeIn[0].removeAttribute('selected', 'selected');
-//   if (timeOut.value === '12:00') {
-//     timeIn[0].setAttribute('selected', 'selected');
-//   }
-//   timeIn[1].removeAttribute('selected', 'selected');
-//   if (timeOut.value === '13:00') {
-//     timeIn[1].setAttribute('selected', 'selected');
-//   }
-//   timeIn[2].removeAttribute('selected', 'selected');
-//   if (timeOut.value === '14:00') {
-//     timeIn[2].setAttribute('selected', 'selected');
-//   }
-// });
+timeOut.addEventListener('change', (evt) => {
+  timeIn.value = evt.target.value;
+});
 
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
