@@ -36,10 +36,10 @@ function getRoomsErrorMessage () {
     return `${numberRooms.value} комната только для 1 гостя`;
   }
   if (numberRooms.value === '2') {
-    return `${numberRooms.value} комнаты не больше 2х гостей`;
+    return `В ${numberRooms.value} комнаты не больше 2х гостей`;
   }
   if (numberRooms.value === '3') {
-    return `${numberRooms.value} комнаты не больше 3х гостей`;
+    return `В ${numberRooms.value} комнаты не больше 3х гостей`;
   }
   if (numberRooms.value === '100') {
     return `${numberRooms.value} комнат не для гостей`;
@@ -47,6 +47,38 @@ function getRoomsErrorMessage () {
 }
 
 pristine.addValidator(numberGuests, validateRoom, getRoomsErrorMessage);
+
+const apartmentType = adForm.querySelector('#type');
+const apartmentOption = {
+  'bungalow': '0',
+  'flat': '1000',
+  'hotel': '3000',
+  'house': '5000',
+  'palace': '10000',
+};
+
+function apartmentPrice () {
+  price.placeholder = apartmentOption[apartmentType.value];
+  price.min = apartmentOption[apartmentType.value];
+  return !((price.value < +apartmentOption[apartmentType.value]));
+}
+
+function apartmentErrorText () {
+  return `Минимальная цена ${apartmentOption[apartmentType.value]} руб.`;
+}
+
+pristine.addValidator(apartmentType, apartmentPrice, apartmentErrorText);
+
+const timeIn = adForm.querySelector('#timein');
+const timeOut = adForm.querySelector('#timeout');
+
+timeIn.addEventListener('change', (evt) => {
+  timeOut.value = evt.target.value;
+});
+
+timeOut.addEventListener('change', (evt) => {
+  timeIn.value = evt.target.value;
+});
 
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
