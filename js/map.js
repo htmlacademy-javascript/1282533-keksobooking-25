@@ -68,8 +68,8 @@ mainPinMarker.on('moveend', (evt) => {
 
 resetButton.addEventListener('click', () => {
   mainPinMarker.setLatLng({
-    lat: 35.68,
-    lng: 139.75,
+    lat: TOKYO.lat,
+    lng: TOKYO.lng,
   });
-  map.setView([35.681, 139.769], 12);
+  map.setView([TOKYO.lat, TOKYO.lng], 13);
 });

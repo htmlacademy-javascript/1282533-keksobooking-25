@@ -1,2 +1,3 @@
-import './ad-form.js';
+import './ad-form-validate.js';
 import './map.js';
+import './slider.js';

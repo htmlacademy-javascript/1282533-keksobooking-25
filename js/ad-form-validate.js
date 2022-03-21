@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import {adForm} from './toggle-form-state.js';
+import {APARTMENT_OPTION} from './constants.js';
 
 const title = adForm.querySelector('#title');
 title.setAttribute('data-pristine-required-message', 'Обязательное поле для заполнения');
@@ -49,22 +50,15 @@ function getRoomsErrorMessage () {
 pristine.addValidator(numberGuests, validateRoom, getRoomsErrorMessage);
 
 const apartmentType = adForm.querySelector('#type');
-const apartmentOption = {
-  'bungalow': '0',
-  'flat': '1000',
-  'hotel': '3000',
-  'house': '5000',
-  'palace': '10000',
-};
 
 function apartmentPrice () {
-  price.placeholder = apartmentOption[apartmentType.value];
-  price.min = apartmentOption[apartmentType.value];
-  return !((price.value < +apartmentOption[apartmentType.value]));
+  price.placeholder = APARTMENT_OPTION[apartmentType.value];
+  price.min = APARTMENT_OPTION[apartmentType.value];
+  return !((price.value < +APARTMENT_OPTION[apartmentType.value]));
 }
 
 function apartmentErrorText () {
-  return `Минимальная цена ${apartmentOption[apartmentType.value]} руб.`;
+  return `Минимальная цена ${APARTMENT_OPTION[apartmentType.value]} руб.`;
 }
 
 pristine.addValidator(apartmentType, apartmentPrice, apartmentErrorText);

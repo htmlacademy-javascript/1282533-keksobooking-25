@@ -5,6 +5,14 @@ const TOKYO = {
   lng: 139.754,
 };
 
+const APARTMENT_OPTION = {
+  'bungalow': '0',
+  'flat': '1000',
+  'hotel': '3000',
+  'house': '5000',
+  'palace': '10000',
+};
+
 const PLACE_AND_TIME = {
   apartments:
   [
@@ -40,4 +48,4 @@ const FACILITIES = {
   ],
 };
 
-export {ARRAY_USERS_COUNT, PLACE_AND_TIME, FACILITIES, TOKYO};
+export {ARRAY_USERS_COUNT, PLACE_AND_TIME, FACILITIES, TOKYO, APARTMENT_OPTION};
