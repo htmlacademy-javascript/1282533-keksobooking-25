@@ -1,5 +1,5 @@
 import {ARRAY_USERS_COUNT, PLACE_AND_TIME, FACILITIES} from './constants.js';
-import {getRandomInteger, getNumberImg, getRandomArray, longitude, latitude} from './util.js';
+import {getRandomInteger, getRandomFloat, getNumberImg, getRandomArray} from './util.js';
 
 const getAvatar = () => {
   const addressImg = getNumberImg().map((currentValue) => {
@@ -30,7 +30,7 @@ const createAdvertisement = () => ({
   },
   offer: {
     title: 'Какой-то заголовок',
-    address: `${latitude} ${latitude}`,
+    address: '',
     price: getRandomInteger(1000, 10000),
     type: getOneOfMany(1, 5, PLACE_AND_TIME.apartments),
     rooms: getRandomInteger(1, 10),
@@ -42,8 +42,8 @@ const createAdvertisement = () => ({
     photos: getOneOfMany(1, 3, FACILITIES.interior),
   },
   location: {
-    lat: latitude,
-    lng: longitude,
+    lat: getRandomFloat(35.65, 35.7, 5),
+    lng: getRandomFloat(139.7, 139.8, 5),
   }
 });
 

@@ -1,5 +1,9 @@
-// Поменять обратно на 10, 3 поставил просто для лучшей визуализации
-const ARRAY_USERS_COUNT = 3;
+const ARRAY_USERS_COUNT = 10;
+
+const TOKYO = {
+  lat: 35.678,
+  lng: 139.754,
+};
 
 const PLACE_AND_TIME = {
   apartments:
@@ -36,4 +40,4 @@ const FACILITIES = {
   ],
 };
 
-export {ARRAY_USERS_COUNT, PLACE_AND_TIME, FACILITIES};
+export {ARRAY_USERS_COUNT, PLACE_AND_TIME, FACILITIES, TOKYO};

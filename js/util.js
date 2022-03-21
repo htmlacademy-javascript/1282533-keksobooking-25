@@ -15,9 +15,6 @@ const getRandomFloat = (min = 1, max = 5, digits = 1) => {
   return +floatNumber;
 };
 
-const latitude = getRandomFloat(35.65, 35.7, 5);
-const longitude = getRandomFloat(139.7, 139.8, 5);
-
 const getNumberImg = (arrayLength = 10) => {
   const numbersImg = [...Array(Math.abs(arrayLength)).keys()];
   const addZero = numbersImg.map((currentValue) => {
@@ -86,4 +83,4 @@ const getGuestsText = (guests) => {
   return word;
 };
 
-export{getRandomInteger, getNumberImg, getRandomArray, getPlaceText, getRoomsText, getGuestsText, longitude, latitude};
+export{getRandomInteger, getRandomFloat, getNumberImg, getRandomArray, getPlaceText, getRoomsText, getGuestsText};

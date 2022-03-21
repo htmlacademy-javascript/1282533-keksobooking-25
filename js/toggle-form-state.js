@@ -29,7 +29,4 @@ const activatePageForm = () => {
   });
 };
 
-disablePageForm();
-activatePageForm();
-
 export {disablePageForm, activatePageForm, adForm};
