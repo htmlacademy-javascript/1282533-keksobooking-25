@@ -1,21 +1,13 @@
 /* eslint-disable no-console */
-import {createArrayAdvertisement} from './data.js';
 import {getPlaceText, getRoomsText, getGuestsText} from './util.js';
 
-console.log(createArrayAdvertisement());
-
-const advertisement = createArrayAdvertisement();
-
 const popup = document.querySelector('#card').content.querySelector('.popup');
-const mapCanvas = document.querySelector('.map__canvas');
 
-// location записан на будущее
-// eslint-disable-next-line no-unused-vars
-advertisement.forEach(({author, offer, location}) => {
+const createPopupAdvertisement = (author, offer, location) => {
   const popupClone = popup.cloneNode(true);
   popupClone.querySelector('.popup__avatar').src = author.avatar;
   popupClone.querySelector('.popup__title').textContent = offer.title;
-  popupClone.querySelector('.popup__text--address').textContent = offer.address;
+  popupClone.querySelector('.popup__text--address').textContent = `${location.lat} ${location.lng}`;
   popupClone.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
   popupClone.querySelector('.popup__type').textContent = getPlaceText(offer.type);
   popupClone.querySelector('.popup__text--capacity').textContent = `${offer.rooms} ${getRoomsText(offer.rooms)} для ${offer.guests} ${getGuestsText(offer.guests)}`;
@@ -39,5 +31,7 @@ advertisement.forEach(({author, offer, location}) => {
     }
   });
 
-  mapCanvas.append(popupClone);
-});
+  return popupClone;
+};
+
+export {createPopupAdvertisement};
