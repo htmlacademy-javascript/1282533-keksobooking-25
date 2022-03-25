@@ -4,7 +4,6 @@ import {createPopupAdvertisement} from './advertisement.js';
 import {TOKYO} from './constants.js';
 
 const inputAddress = document.querySelector('#address');
-const resetButton = document.querySelector('.ad-form__reset');
 const advertisement = createArrayAdvertisement();
 
 disablePageForm();
@@ -66,10 +65,4 @@ mainPinMarker.on('moveend', (evt) => {
   inputAddress.value = `${lat.toFixed(5)} ${lng.toFixed(5)}`;
 });
 
-resetButton.addEventListener('click', () => {
-  mainPinMarker.setLatLng({
-    lat: TOKYO.lat,
-    lng: TOKYO.lng,
-  });
-  map.setView([TOKYO.lat, TOKYO.lng], 13);
-});
+export {map, mainPinMarker, inputAddress};
