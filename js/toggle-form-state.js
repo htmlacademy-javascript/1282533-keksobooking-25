@@ -32,4 +32,4 @@ const activatePageForm = () => {
   });
 };
 
-export {disablePageForm, activatePageForm, adForm};
+export {disablePageForm, activatePageForm};

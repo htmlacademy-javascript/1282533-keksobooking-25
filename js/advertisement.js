@@ -1,9 +1,8 @@
-/* eslint-disable no-console */
 import {getPlaceText, getRoomsText, getGuestsText} from './util.js';
 
 const popup = document.querySelector('#card').content.querySelector('.popup');
 
-const createPopupAdvertisement = (author, offer, location) => {
+const createServerPopupAdvertisement = (author, offer, location) => {
   const popupClone = popup.cloneNode(true);
   popupClone.querySelector('.popup__avatar').src = author.avatar;
   popupClone.querySelector('.popup__title').textContent = offer.title;
@@ -16,7 +15,7 @@ const createPopupAdvertisement = (author, offer, location) => {
   popupClone.querySelector('.popup__photo').src = offer.photos;
 
   const featureList = popupClone.querySelectorAll('.popup__feature');
-  const test = popupClone.querySelector('.popup__features');
+  const featureContainer = popupClone.querySelector('.popup__features');
 
   if (Object.keys(offer).includes('features')) {
     const modifiers = offer.features.map((feature) => `popup__feature--${feature}`);
@@ -29,10 +28,42 @@ const createPopupAdvertisement = (author, offer, location) => {
       }
     });
   } else {
-    test.remove();
+    featureContainer.remove();
   }
 
   return popupClone;
 };
 
-export {createPopupAdvertisement};
+const createUserPopupAdvertisement = (data) => {
+  const popupClone = popup.cloneNode(true);
+  // popupClone.querySelector('.popup__avatar').src = author.avatar;
+  popupClone.querySelector('.popup__title').textContent = data.title;
+  popupClone.querySelector('.popup__text--address').textContent = `${data.address}`;
+  popupClone.querySelector('.popup__text--price').textContent = `${data.price} ₽/ночь`;
+  popupClone.querySelector('.popup__type').textContent = getPlaceText(data.type);
+  popupClone.querySelector('.popup__text--capacity').textContent = `${data.rooms} ${getRoomsText(data.rooms)} для ${data.capacity} ${getGuestsText(data.capacity)}`;
+  popupClone.querySelector('.popup__text--time').textContent = `Заезд после ${data.timein}, выезд до ${data.timeout}`;
+  popupClone.querySelector('.popup__description').textContent = data.description;
+  // popupClone.querySelector('.popup__photo').src = offer.photos;
+
+  const featureList = popupClone.querySelectorAll('.popup__feature');
+  const featureContainer = popupClone.querySelector('.popup__features');
+
+  if (Object.keys(data).includes('feature')) {
+    const modifiers = data.feature.map((feature) => `popup__feature--${feature}`);
+
+    featureList.forEach((featureListItem) => {
+      const modifier = featureListItem.classList[1];
+
+      if (!modifiers.includes(modifier)) {
+        featureListItem.remove();
+      }
+    });
+  } else {
+    featureContainer.remove();
+  }
+
+  return popupClone;
+};
+
+export {createServerPopupAdvertisement, createUserPopupAdvertisement};

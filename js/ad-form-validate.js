@@ -1,6 +1,7 @@
-/* eslint-disable no-console */
-import {adForm} from './toggle-form-state.js';
 import {APARTMENT_OPTION} from './constants.js';
+import {userAdvertisementPinMap} from './map.js';
+
+const adForm = document.querySelector('.ad-form');
 
 const title = adForm.querySelector('#title');
 title.setAttribute('data-pristine-required-message', 'Обязательное поле для заполнения');
@@ -79,8 +80,15 @@ adForm.addEventListener('submit', (evt) => {
 
   const isValid = pristine.validate();
   if (isValid) {
-    console.log('Можно отправлять');
-  } else {
-    console.log('Форма невалидна');
+    const formData = new FormData(evt.target);
+
+    fetch(
+      'https://25.javascript.pages.academy/keksobooking',
+      {
+        method: 'POST',
+        body: formData,
+      })
+      .then((Response) => Response.json())
+      .then((data) => userAdvertisementPinMap(data));
   }
 });

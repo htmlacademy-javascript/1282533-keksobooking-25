@@ -1,5 +1,5 @@
 import {disablePageForm, activatePageForm} from './toggle-form-state.js';
-import {createPopupAdvertisement} from './advertisement.js';
+import {createServerPopupAdvertisement, createUserPopupAdvertisement} from './advertisement.js';
 import {TOKYO} from './constants.js';
 
 const inputAddress = document.querySelector('#address');
@@ -17,7 +17,7 @@ L.tileLayer(
   },
 ).addTo(map);
 
-const advertisementPinMap = (array) => {
+const serverAdvertisementPinMap = (array) => {
   array.forEach(({author, location, offer}) => {
     const iconMarker = L.icon({
       iconUrl: './img/pin.svg',
@@ -32,9 +32,28 @@ const advertisementPinMap = (array) => {
       icon: iconMarker,
     });
     marker
-      .bindPopup(createPopupAdvertisement(author, offer, location))
+      .bindPopup(createServerPopupAdvertisement(author, offer, location))
       .addTo(map);
   });
+};
+
+const userAdvertisementPinMap = (data) => {
+  const a = data.address.split(' ');
+  const iconMarker = L.icon({
+    iconUrl: './img/pin.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  });
+  const marker = L.marker({
+    lat: a[0],
+    lng: a[1],
+  },
+  {
+    icon: iconMarker,
+  });
+  marker
+    .bindPopup(createUserPopupAdvertisement(data))
+    .addTo(map);
 };
 
 const mainIconMarker = L.icon({
@@ -65,4 +84,4 @@ mainPinMarker.on('moveend', (evt) => {
   inputAddress.value = `${lat.toFixed(5)} ${lng.toFixed(5)}`;
 });
 
-export {map, mainPinMarker, inputAddress, advertisementPinMap};
+export {map, mainPinMarker, inputAddress, serverAdvertisementPinMap, userAdvertisementPinMap};
