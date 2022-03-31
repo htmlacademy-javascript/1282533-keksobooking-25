@@ -1,3 +1,5 @@
+const body = document.querySelector('body');
+
 const getPlaceText = (place) => {
   switch (place) {
     case 'palace':
@@ -45,4 +47,17 @@ const getGuestsText = (guests) => {
   return word;
 };
 
-export{getPlaceText, getRoomsText, getGuestsText};
+const getStateMessage = (state) => {
+  const stateTemplate = document.querySelector(`#${state}`).content.querySelector(`.${state}`);
+
+  const stateContainer = stateTemplate.cloneNode(true);
+  const stateButton = stateContainer.querySelector('.error__button');
+
+  stateButton.addEventListener('click', () => {
+    stateContainer.remove();
+  });
+
+  return body.append(stateContainer);
+};
+
+export{getPlaceText, getRoomsText, getGuestsText, getStateMessage};

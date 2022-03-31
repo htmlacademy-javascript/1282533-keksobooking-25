@@ -1,5 +1,6 @@
 import {APARTMENT_OPTION} from './constants.js';
 import {userAdvertisementPinMap} from './map.js';
+import {getStateMessage} from './util.js';
 
 const adForm = document.querySelector('.ad-form');
 
@@ -89,6 +90,8 @@ adForm.addEventListener('submit', (evt) => {
         body: formData,
       })
       .then((Response) => Response.json())
-      .then((data) => userAdvertisementPinMap(data));
+      .then((data) => userAdvertisementPinMap(data))
+      .then(() => getStateMessage('success'))
+      .catch(() => getStateMessage('error'));
   }
 });
