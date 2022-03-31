@@ -51,7 +51,7 @@ const getStateMessage = (state) => {
   const stateTemplate = document.querySelector(`#${state}`).content.querySelector(`.${state}`);
 
   const stateContainer = stateTemplate.cloneNode(true);
-  const stateButton = stateContainer.querySelector('.error__button');
+  const stateButton = stateContainer.querySelector(`.${state}__button`);
 
   stateButton.addEventListener('click', () => {
     stateContainer.remove();
@@ -60,4 +60,22 @@ const getStateMessage = (state) => {
   return body.append(stateContainer);
 };
 
-export{getPlaceText, getRoomsText, getGuestsText, getStateMessage};
+const getDataLoadingErrorMessage = () => {
+  const errorLoadDataTemplate = document.querySelector('#error-load-data').content.querySelector('.error-load-data');
+
+  const errorLoadDataContainer = errorLoadDataTemplate.cloneNode(true);
+  const continueButton = errorLoadDataContainer.querySelector('.error-load-data__button--continue-job');
+  const reloadButton = errorLoadDataContainer.querySelector('.error-load-data__button--reload');
+
+  continueButton.addEventListener('click', () => {
+    errorLoadDataContainer.remove();
+  });
+
+  reloadButton.addEventListener('click', () => {
+    location.reload();
+  });
+
+  return body.append(errorLoadDataContainer);
+};
+
+export{getPlaceText, getRoomsText, getGuestsText, getStateMessage, getDataLoadingErrorMessage};
