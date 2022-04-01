@@ -1,4 +1,4 @@
-import {getPlaceText, getRoomsText, getGuestsText} from './util.js';
+import {getPlaceText, getRoomsText, getGuestsText} from './data.js';
 
 const popup = document.querySelector('#card').content.querySelector('.popup');
 
@@ -12,7 +12,20 @@ const createServerPopupAdvertisement = (author, offer, location) => {
   popupClone.querySelector('.popup__text--capacity').textContent = `${offer.rooms} ${getRoomsText(offer.rooms)} для ${offer.guests} ${getGuestsText(offer.guests)}`;
   popupClone.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
   popupClone.querySelector('.popup__description').textContent = offer.description;
-  popupClone.querySelector('.popup__photo').src = offer.photos;
+
+  const photosContainer = popupClone.querySelector('.popup__photos');
+  const photo = photosContainer.querySelector('.popup__photo');
+
+  for (let i = 0; i < offer.photos.length; i++) {
+    if (offer.photos.length === 1) {
+      photo.src = offer.photos[i];
+    } else {
+      const photoClone = photo.cloneNode(true);
+      photoClone.src = offer.photos[i];
+      photosContainer.append(photoClone);
+      photosContainer.firstChild.remove();
+    }
+  }
 
   const featureList = popupClone.querySelectorAll('.popup__feature');
   const featureContainer = popupClone.querySelector('.popup__features');

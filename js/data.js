@@ -1,3 +1,5 @@
+import {onResetButtonClick} from './reset.js';
+
 const body = document.querySelector('body');
 
 const getPlaceText = (place) => {
@@ -55,6 +57,10 @@ const getStateMessage = (state) => {
 
   stateButton.addEventListener('click', () => {
     stateContainer.remove();
+
+    if (`${state}` === 'success') {
+      onResetButtonClick();
+    }
   });
 
   return body.append(stateContainer);

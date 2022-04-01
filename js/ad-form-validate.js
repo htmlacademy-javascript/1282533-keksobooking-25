@@ -1,6 +1,7 @@
 import {APARTMENT_OPTION} from './constants.js';
 import {userAdvertisementPinMap} from './map.js';
-import {getStateMessage} from './util.js';
+import {getStateMessage} from './data.js';
+import {sendData} from './api.js';
 
 const adForm = document.querySelector('.ad-form');
 
@@ -81,17 +82,10 @@ adForm.addEventListener('submit', (evt) => {
 
   const isValid = pristine.validate();
   if (isValid) {
-    const formData = new FormData(evt.target);
-
-    fetch(
-      'https://25.javascript.pages.academy/keksobooking',
-      {
-        method: 'POST',
-        body: formData,
-      })
-      .then((Response) => Response.json())
-      .then((data) => userAdvertisementPinMap(data))
-      .then(() => getStateMessage('success'))
-      .catch(() => getStateMessage('error'));
+    sendData(
+      userAdvertisementPinMap,
+      getStateMessage,
+      new FormData(evt.target)
+    );
   }
 });

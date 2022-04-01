@@ -24,9 +24,7 @@ const resetPrice = () => {
   price.value = +APARTMENT_OPTION['flat'];
 };
 
-resetButton.addEventListener('click', (evt) => {
-  evt.preventDefault();
-
+const onResetButtonClick = () => {
   inputAddress.value = `${TOKYO.lat} ${TOKYO.lng}`;
   mainPinMarker.setLatLng({
     lat: TOKYO.lat,
@@ -47,4 +45,11 @@ resetButton.addEventListener('click', (evt) => {
   });
 
   document.querySelector('.leaflet-popup').remove();
+};
+
+resetButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  onResetButtonClick();
 });
+
+export {onResetButtonClick};
