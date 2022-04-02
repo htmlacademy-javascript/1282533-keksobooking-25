@@ -135,9 +135,9 @@
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="capacity">Количество мест</label>
           <select id="capacity" name="capacity">
-            <option value="3" selected>для 3 гостей</option>
+            <option value="3">для 3 гостей</option>
             <option value="2">для 2 гостей</option>
-            <option value="1">для 1 гостя</option>
+            <option value="1" selected>для 1 гостя</option>
             <option value="0">не для гостей</option>
           </select>
         </fieldset>
@@ -218,10 +218,28 @@
     </article>
   </template>
 
+  <!-- Сообщение об ошибке получения данных с сервера -->
+  <template id="error-load-data">
+    <div class="error-load-data">
+      <p class="error-load-data__message">
+        Ошибка соединений с сервером!
+        <br>
+        Не удалось показать объявления других пользователей.
+        <br>
+        Приносим свои извинения.
+      </p>
+      <div class="error-load-data__wrapper">
+        <button type="button" class="error-load-data__button error-load-data__button--continue-job">Продолжить работу</button>
+        <button type="button" class="error-load-data__button error-load-data__button--reload">Перезагрузить страницу</button>
+      </div>
+    </div>
+  </template>
+
   <!-- Сообщение об успешном создании объявления -->
   <template id="success">
     <div class="success">
       <p class="success__message">Ваше объявление<br>успешно размещено!</p>
+      <button type="button" class="success__button">Продолжить работу</button>
     </div>
   </template>
 

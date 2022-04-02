@@ -1,6 +1,9 @@
-/* eslint-disable no-console */
-import {adForm} from './toggle-form-state.js';
 import {APARTMENT_OPTION} from './constants.js';
+import {userAdvertisementPinMap} from './map.js';
+import {getStateMessage} from './data.js';
+import {sendData} from './api.js';
+
+const adForm = document.querySelector('.ad-form');
 
 const title = adForm.querySelector('#title');
 title.setAttribute('data-pristine-required-message', 'Обязательное поле для заполнения');
@@ -79,8 +82,10 @@ adForm.addEventListener('submit', (evt) => {
 
   const isValid = pristine.validate();
   if (isValid) {
-    console.log('Можно отправлять');
-  } else {
-    console.log('Форма невалидна');
+    sendData(
+      userAdvertisementPinMap,
+      getStateMessage,
+      new FormData(evt.target)
+    );
   }
 });
