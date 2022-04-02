@@ -16,17 +16,6 @@ const createServerPopupAdvertisement = (author, offer, location) => {
   const photosContainer = popupClone.querySelector('.popup__photos');
   const photo = photosContainer.querySelector('.popup__photo');
 
-  // for (let i = 0; i < offer.photos.length; i++) {
-  //   if (offer.photos.length === 1) {
-  //     photo.src = offer.photos[i];
-  //   } else {
-  //     const photoClone = photo.cloneNode(true);
-  //     photoClone.src = offer.photos[i];
-  //     photosContainer.append(photoClone);
-  //     photosContainer.firstChild.remove();
-  //   }
-  // }
-
   if (offer.photos.length === 1) {
     photo.src = offer.photos;
   } else {
