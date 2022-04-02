@@ -16,15 +16,15 @@ const createServerPopupAdvertisement = (author, offer, location) => {
   const photosContainer = popupClone.querySelector('.popup__photos');
   const photo = photosContainer.querySelector('.popup__photo');
 
-  for (let i = 0; i < offer.photos.length; i++) {
-    if (offer.photos.length === 1) {
-      photo.src = offer.photos[i];
-    } else {
+  if (offer.photos.length === 1) {
+    photo.src = offer.photos;
+  } else {
+    offer.photos.forEach((value) => {
       const photoClone = photo.cloneNode(true);
-      photoClone.src = offer.photos[i];
+      photoClone.src = value;
       photosContainer.append(photoClone);
       photosContainer.firstChild.remove();
-    }
+    });
   }
 
   const featureList = popupClone.querySelectorAll('.popup__feature');
