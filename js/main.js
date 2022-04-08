@@ -1,9 +1,12 @@
 import './ad-form-validate.js';
 import './slider.js';
+// import './filter.js';
 
-import {ARRAY_USERS_COUNT} from './constants.js';
-import {serverAdvertisementPinMap} from './map.js';
+import {serverAdvertisementPinMap, advertisementFilter} from './map.js';
 import {getDataLoadingErrorMessage} from './data.js';
 import {getData} from './api.js';
 
-getData(serverAdvertisementPinMap, getDataLoadingErrorMessage, ARRAY_USERS_COUNT);
+getData((data) => {
+  serverAdvertisementPinMap(data);
+  advertisementFilter(data, serverAdvertisementPinMap);
+}, getDataLoadingErrorMessage);

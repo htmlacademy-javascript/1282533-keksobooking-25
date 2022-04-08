@@ -17,24 +17,51 @@ L.tileLayer(
   },
 ).addTo(map);
 
-const serverAdvertisementPinMap = (array) => {
-  array.forEach(({author, location, offer}) => {
-    const iconMarker = L.icon({
-      iconUrl: './img/pin.svg',
-      iconSize: [40, 40],
-      iconAnchor: [20, 40],
+const mapFilter = document.querySelector('.map__filters');
+
+const advertisementFilter = (data, cb) => {
+  mapFilter.addEventListener('change', (evt) => {
+    const filteredData = data.filter((currentValue) => {
+      const {offer} = currentValue;
+      if (evt.target.id === 'housing-type') {
+        if (evt.target.value === 'any') {
+          return true;
+        }
+        return offer.type === evt.target.value;
+      }
     });
-    const marker = L.marker({
-      lat: location.lat,
-      lng: location.lng,
-    },
-    {
-      icon: iconMarker,
-    });
-    marker
-      .bindPopup(createServerPopupAdvertisement(author, offer, location))
-      .addTo(map);
+
+    const unnecessaryPinMap = document.querySelectorAll('.remove');
+    unnecessaryPinMap.forEach((value) => value.remove());
+    cb(filteredData);
   });
+};
+
+const serverAdvertisementPinMap = (array) => {
+  array
+    .slice(0, 10)
+    .forEach(({author, location, offer}) => {
+      const iconMarker = L.icon({
+        iconUrl: './img/pin.svg',
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+      });
+      const marker = L.marker({
+        lat: location.lat,
+        lng: location.lng,
+      },
+      {
+        icon: iconMarker,
+      });
+      marker
+        .bindPopup(createServerPopupAdvertisement(author, offer, location))
+        .addTo(map);
+    });
+
+  const unnecessaryPinMap = document.querySelectorAll('.leaflet-marker-icon');
+  for (let i = 1; i < unnecessaryPinMap.length; i++) {
+    unnecessaryPinMap[i].classList.add('remove');
+  }
 };
 
 const userAdvertisementPinMap = (data) => {
@@ -84,4 +111,4 @@ mainPinMarker.on('moveend', (evt) => {
   inputAddress.value = `${lat.toFixed(5)} ${lng.toFixed(5)}`;
 });
 
-export {map, mainPinMarker, inputAddress, serverAdvertisementPinMap, userAdvertisementPinMap};
+export {map, mainPinMarker, inputAddress, serverAdvertisementPinMap, userAdvertisementPinMap, advertisementFilter};
