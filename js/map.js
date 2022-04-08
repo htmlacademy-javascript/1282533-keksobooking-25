@@ -21,8 +21,7 @@ const mapFilter = document.querySelector('.map__filters');
 
 const advertisementFilter = (data, cb) => {
   mapFilter.addEventListener('change', (evt) => {
-    const filteredData = data.filter((currentValue) => {
-      const {offer} = currentValue;
+    const filteredData = data.filter(({offer}) => {
       if (evt.target.id === 'housing-type') {
         if (evt.target.value === 'any') {
           return true;
