@@ -1,6 +1,6 @@
 import {disablePageForm, activatePageForm} from './toggle-form-state.js';
 import {createServerPopupAdvertisement, createUserPopupAdvertisement} from './advertisement.js';
-import {TOKYO} from './constants.js';
+import {ARRAY_USERS_COUNT, TOKYO} from './constants.js';
 
 const inputAddress = document.querySelector('#address');
 
@@ -17,28 +17,9 @@ L.tileLayer(
   },
 ).addTo(map);
 
-const mapFilter = document.querySelector('.map__filters');
-
-const advertisementFilter = (data, cb) => {
-  mapFilter.addEventListener('change', (evt) => {
-    const filteredData = data.filter(({offer}) => {
-      if (evt.target.id === 'housing-type') {
-        if (evt.target.value === 'any') {
-          return true;
-        }
-        return offer.type === evt.target.value;
-      }
-    });
-
-    const unnecessaryPinMap = document.querySelectorAll('.remove');
-    unnecessaryPinMap.forEach((value) => value.remove());
-    cb(filteredData);
-  });
-};
-
 const serverAdvertisementPinMap = (array) => {
   array
-    .slice(0, 10)
+    .slice(0, ARRAY_USERS_COUNT)
     .forEach(({author, location, offer}) => {
       const iconMarker = L.icon({
         iconUrl: './img/pin.svg',
@@ -110,4 +91,4 @@ mainPinMarker.on('moveend', (evt) => {
   inputAddress.value = `${lat.toFixed(5)} ${lng.toFixed(5)}`;
 });
 
-export {map, mainPinMarker, inputAddress, serverAdvertisementPinMap, userAdvertisementPinMap, advertisementFilter};
+export {map, mainPinMarker, inputAddress, serverAdvertisementPinMap, userAdvertisementPinMap};
