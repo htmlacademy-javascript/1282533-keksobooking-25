@@ -1,4 +1,4 @@
-import {getPlaceText, getRoomsText, getGuestsText} from './data.js';
+import {getPlaceText, getRoomsText, getGuestsText} from './util.js';
 
 const popup = document.querySelector('#card').content.querySelector('.popup');
 
