@@ -14,7 +14,7 @@ const getPhotoPreview = (photo, preview) => {
 
     if (matches) {
       if (preview === previewRoomPhoto) {
-        preview.style.background = `center / contain no-repeat url(${URL.createObjectURL(file)})`;
+        preview.style.background = `center / contain no-repeat url(${URL.createObjectURL(file)}) #e4e4de`;
       } else {
         preview.src = URL.createObjectURL(file);
       }

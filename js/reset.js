@@ -12,6 +12,9 @@ const numberGuests = document.querySelector('#capacity');
 const timeIn = document.querySelector('#timein');
 const timeOut = document.querySelector('#timeout');
 const featureCheckboxs = document.querySelectorAll('.features__checkbox');
+const previewAvatar = document.querySelector('.ad-form-header__preview').children[0];
+const previewRoomPhoto = document.querySelector('.ad-form__photo');
+
 
 const resetPrice = () => {
   slider.noUiSlider.updateOptions({
@@ -36,15 +39,20 @@ const onResetButtonClick = () => {
   title.value = '';
   description.value = '';
   numberRooms.value = '1';
-  numberGuests.value = '3';
+  numberGuests.value = '1';
   timeIn.value = '12:00';
   timeOut.value = '12:00';
+  previewAvatar.src = 'img/muffin-grey.svg';
+  previewRoomPhoto.style.background = '#e4e4de';
 
   featureCheckboxs.forEach((currentValue) => {
     currentValue.checked = false;
   });
 
-  document.querySelector('.leaflet-popup').remove();
+  const leafletPopup = document.querySelector('.leaflet-popup');
+  if (leafletPopup) {
+    leafletPopup.remove();
+  }
 };
 
 resetButton.addEventListener('click', (evt) => {
