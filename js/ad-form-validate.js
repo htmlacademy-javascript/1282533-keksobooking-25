@@ -1,5 +1,5 @@
 import {APARTMENT_OPTION} from './constants.js';
-import {userAdvertisementPinMap} from './map.js';
+import {showUserAd} from './map.js';
 import {getStateMessage} from './data.js';
 import {sendData} from './api.js';
 
@@ -83,7 +83,7 @@ adForm.addEventListener('submit', (evt) => {
   const isValid = pristine.validate();
   if (isValid) {
     sendData(
-      userAdvertisementPinMap,
+      showUserAd,
       getStateMessage,
       new FormData(evt.target)
     );

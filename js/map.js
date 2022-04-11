@@ -1,5 +1,5 @@
 import {disablePageForm, activatePageForm} from './toggle-form-state.js';
-import {createServerPopupAdvertisement, createUserPopupAdvertisement} from './advertisement.js';
+import {createServerPopup, createUserPopup} from './advertisement.js';
 import {ARRAY_USERS_COUNT, TOKYO} from './constants.js';
 
 const inputAddress = document.querySelector('#address');
@@ -17,7 +17,7 @@ L.tileLayer(
   },
 ).addTo(map);
 
-const serverAdvertisementPinMap = (array) => {
+const showServerAd = (array) => {
   array
     .slice(0, ARRAY_USERS_COUNT)
     .forEach(({author, location, offer}) => {
@@ -34,17 +34,17 @@ const serverAdvertisementPinMap = (array) => {
         icon: iconMarker,
       });
       marker
-        .bindPopup(createServerPopupAdvertisement(author, offer, location))
+        .bindPopup(createServerPopup(author, offer, location))
         .addTo(map);
     });
 
-  const unnecessaryPinMap = document.querySelectorAll('.leaflet-marker-icon');
-  for (let i = 1; i < unnecessaryPinMap.length; i++) {
-    unnecessaryPinMap[i].classList.add('remove');
+  const leafletMarkerIcons = document.querySelectorAll('.leaflet-marker-icon');
+  for (let i = 1; i < leafletMarkerIcons.length; i++) {
+    leafletMarkerIcons[i].classList.add('remove');
   }
 };
 
-const userAdvertisementPinMap = (data) => {
+const showUserAd = (data) => {
   const a = data.address.split(' ');
   const iconMarker = L.icon({
     iconUrl: './img/pin.svg',
@@ -59,7 +59,7 @@ const userAdvertisementPinMap = (data) => {
     icon: iconMarker,
   });
   marker
-    .bindPopup(createUserPopupAdvertisement(data))
+    .bindPopup(createUserPopup(data))
     .addTo(map);
 };
 
@@ -91,4 +91,4 @@ mainPinMarker.on('moveend', (evt) => {
   inputAddress.value = `${lat.toFixed(5)} ${lng.toFixed(5)}`;
 });
 
-export {map, mainPinMarker, inputAddress, serverAdvertisementPinMap, userAdvertisementPinMap};
+export {map, mainPinMarker, inputAddress, showServerAd, showUserAd};

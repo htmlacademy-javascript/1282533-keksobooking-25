@@ -1,7 +1,7 @@
-const getData = (pinMap, errorMessage) => {
+const getData = (serverData, errorMessage) => {
   fetch('https://25.javascript.pages.academy/keksobooking/data')
     .then((Response) => Response.json())
-    .then((data) => pinMap(data))
+    .then((data) => serverData(data))
     .catch(() => errorMessage());
 };
 

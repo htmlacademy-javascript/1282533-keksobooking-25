@@ -2,7 +2,7 @@ import {getPlaceText, getRoomsText, getGuestsText} from './util.js';
 
 const popup = document.querySelector('#card').content.querySelector('.popup');
 
-const createServerPopupAdvertisement = (author, offer, location) => {
+const createServerPopup = (author, offer, location) => {
   const popupClone = popup.cloneNode(true);
   popupClone.querySelector('.popup__avatar').src = author.avatar;
   popupClone.querySelector('.popup__title').textContent = offer.title;
@@ -51,7 +51,7 @@ const createServerPopupAdvertisement = (author, offer, location) => {
   return popupClone;
 };
 
-const createUserPopupAdvertisement = (data) => {
+const createUserPopup = (data) => {
   const popupClone = popup.cloneNode(true);
   // popupClone.querySelector('.popup__avatar').src = author.avatar;
   popupClone.querySelector('.popup__title').textContent = data.title;
@@ -83,4 +83,4 @@ const createUserPopupAdvertisement = (data) => {
   return popupClone;
 };
 
-export {createServerPopupAdvertisement, createUserPopupAdvertisement};
+export {createServerPopup, createUserPopup};

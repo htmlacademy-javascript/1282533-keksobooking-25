@@ -1,14 +1,14 @@
 const mapFilter = document.querySelector('.map__filters');
 
 const serialize = (form) => {
-  const selectValue = {};
+  const selectedValue = {};
   for (let i = 0; i < form.children.length; i++) {
     // eslint-disable-next-line no-unused-vars
     const [_, key] = form.children[i].name.split('-');
-    selectValue[key] = form.children[i].value;
+    selectedValue[key] = form.children[i].value;
   }
-  selectValue.features = [];
-  return selectValue;
+  selectedValue.features = [];
+  return selectedValue;
 };
 
 const mapFilterValue = serialize(mapFilter);
@@ -20,7 +20,7 @@ const enumPrice = {
   high: [50000, 100000],
 };
 
-const advertisementFilter = (data, cb) => {
+const filteredAd = (data, cb) => {
   mapFilter.addEventListener('change', (evt) => {
     if (evt.target.name === 'housing-type') {
       mapFilterValue.type = evt.target.value;
@@ -36,7 +36,7 @@ const advertisementFilter = (data, cb) => {
     }
     if (evt.target.name === 'features') {
       if (evt.target.checked) {
-        if (!Object.keys(mapFilterValue).includes('features')) {
+        if (!mapFilterValue.features) {
           mapFilterValue.features = [];
         }
         mapFilterValue.features.push(evt.target.value);
@@ -46,33 +46,33 @@ const advertisementFilter = (data, cb) => {
       }
     }
 
-    if (Object.keys(mapFilterValue).includes('features')) {
+    if (mapFilterValue.features) {
       if (mapFilterValue.features.length === 0) {
         delete mapFilterValue.features;
       }
     }
 
     const filteredData = data.filter(({offer}) => {
-      const valuesFilter = [];
+      const filterValues = [];
       Object.entries(mapFilterValue).forEach(([key, value]) => {
         if (value === 'any') {
-          valuesFilter.push(true);
+          filterValues.push(true);
         } else if (key === 'type') {
-          valuesFilter.push(offer[key] === value);
+          filterValues.push(offer[key] === value);
         } else if (key === 'price') {
           const [min, max] = value;
-          valuesFilter.push(offer[key] <= max && offer[key] >= min);
+          filterValues.push(offer[key] <= max && offer[key] >= min);
         } else if (key === 'features' && offer[key]) {
-          valuesFilter.push(value.every((element) => offer[key].includes(element)));
+          filterValues.push(value.every((element) => offer[key].includes(element)));
         } else {
-          valuesFilter.push(offer[key] === +value);
+          filterValues.push(offer[key] === +value);
         }
       });
-      return valuesFilter.every((element) => element);
+      return filterValues.every((element) => element);
     });
 
-    const unnecessaryPinMap = document.querySelectorAll('.remove');
-    unnecessaryPinMap.forEach((value) => value.remove());
+    const leafletMarkerIcons = document.querySelectorAll('.remove');
+    leafletMarkerIcons.forEach((value) => value.remove());
 
     if (document.querySelector('.leaflet-popup')) {
       document.querySelector('.leaflet-popup').remove();
@@ -82,4 +82,4 @@ const advertisementFilter = (data, cb) => {
   });
 };
 
-export {advertisementFilter};
+export {filteredAd};
