@@ -55,7 +55,7 @@ const getFilterValue = (evt) => {
   return mapFilterValue;
 };
 
-const getFilteredAd = (filterValue, data) => data.filter(({offer}) => {
+const getFilteredAds = (filterValue, data) => data.filter(({offer}) => {
   const isValues = [];
   Object.entries(filterValue).forEach(([key, value]) => {
     if (value === 'any') {
@@ -83,11 +83,9 @@ const cleanMap = () => {
   }
 };
 
-const onChangeMapFilter = (data, cb) => {
-  mapFilter.addEventListener('change', (evt) => {
-    cb(getFilteredAd(getFilterValue(evt), data));
-    cleanMap();
-  });
-};
+const addMapFilterEventListener = (data, cb) => mapFilter.addEventListener('change', (evt) => {
+  cb(getFilteredAds(getFilterValue(evt), data));
+  cleanMap();
+});
 
-export {onChangeMapFilter};
+export {addMapFilterEventListener};
