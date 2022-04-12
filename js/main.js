@@ -3,14 +3,14 @@ import './slider.js';
 
 import {debounce} from './util.js';
 import {RERENDER_DELAY} from './constants.js';
-import {getFilteredAd} from './filter.js';
+import {onChangeMapFilter} from './filter.js';
 import {showServerAd} from './map.js';
 import {getDataLoadingErrorMessage} from './data.js';
 import {getData} from './api.js';
 
 getData((data) => {
   showServerAd(data);
-  getFilteredAd(
+  onChangeMapFilter(
     data,
     debounce(
       showServerAd,
