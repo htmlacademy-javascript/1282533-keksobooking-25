@@ -13,28 +13,28 @@ const createServerPopup = (author, offer, location) => {
   popupClone.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
   popupClone.querySelector('.popup__description').textContent = offer.description;
 
-  const photosContainer = popupClone.querySelector('.popup__photos');
-  const photo = photosContainer.querySelector('.popup__photo');
+  const photoContainer = popupClone.querySelector('.popup__photos');
+  const photo = photoContainer.querySelector('.popup__photo');
 
-  if (Object.keys(offer).includes('photos')) {
+  if (offer.photos) {
     if (offer.photos.length === 1) {
       photo.src = offer.photos;
     } else {
       offer.photos.forEach((value) => {
         const photoClone = photo.cloneNode(true);
         photoClone.src = value;
-        photosContainer.append(photoClone);
-        photosContainer.firstChild.remove();
+        photoContainer.append(photoClone);
+        photoContainer.firstChild.remove();
       });
     }
   } else {
-    photosContainer.remove();
+    photoContainer.remove();
   }
 
   const featureList = popupClone.querySelectorAll('.popup__feature');
   const featureContainer = popupClone.querySelector('.popup__features');
 
-  if (Object.keys(offer).includes('features')) {
+  if (offer.features) {
     const modifiers = offer.features.map((feature) => `popup__feature--${feature}`);
 
     featureList.forEach((featureListItem) => {
@@ -66,7 +66,7 @@ const createUserPopup = (data) => {
   const featureList = popupClone.querySelectorAll('.popup__feature');
   const featureContainer = popupClone.querySelector('.popup__features');
 
-  if (Object.keys(data).includes('feature')) {
+  if (data.feature) {
     const modifiers = data.feature.map((feature) => `popup__feature--${feature}`);
 
     featureList.forEach((featureListItem) => {

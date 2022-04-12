@@ -20,7 +20,7 @@ const enumPrice = {
   high: [50000, 100000],
 };
 
-const filteredAd = (data, cb) => {
+const getFilteredAd = (data, cb) => {
   mapFilter.addEventListener('change', (evt) => {
     if (evt.target.name === 'housing-type') {
       mapFilterValue.type = evt.target.value;
@@ -82,4 +82,4 @@ const filteredAd = (data, cb) => {
   });
 };
 
-export {filteredAd};
+export {getFilteredAd};

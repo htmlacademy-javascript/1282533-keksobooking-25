@@ -60,11 +60,11 @@ function apartmentPrice () {
   return !((price.value < +APARTMENT_OPTION[apartmentType.value]));
 }
 
-function apartmentErrorText () {
+function getPriceErrorMessage () {
   return `Минимальная цена ${APARTMENT_OPTION[apartmentType.value]} руб.`;
 }
 
-pristine.addValidator(apartmentType, apartmentPrice, apartmentErrorText);
+pristine.addValidator(apartmentType, apartmentPrice, getPriceErrorMessage);
 
 const timeIn = adForm.querySelector('#timein');
 const timeOut = adForm.querySelector('#timeout');
