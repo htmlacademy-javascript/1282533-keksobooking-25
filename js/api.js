@@ -1,7 +1,7 @@
-const getData = (cb, errorMessage) => {
+const getData = (onServerDataLoad, errorMessage) => {
   fetch('https://25.javascript.pages.academy/keksobooking/data')
     .then((Response) => Response.json())
-    .then((data) => cb(data))
+    .then((data) => onServerDataLoad(data))
     .catch(() => errorMessage());
 };
 
