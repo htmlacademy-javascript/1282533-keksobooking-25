@@ -1,9 +1,19 @@
 import './ad-form-validate.js';
 import './slider.js';
 
-import {ARRAY_USERS_COUNT} from './constants.js';
-import {serverAdvertisementPinMap} from './map.js';
+import {debounce} from './util.js';
+import {RERENDER_DELAY} from './constants.js';
+import {addMapFilterEventListener} from './filter.js';
+import {showServerAd} from './map.js';
 import {getDataLoadingErrorMessage} from './data.js';
 import {getData} from './api.js';
 
-getData(serverAdvertisementPinMap, getDataLoadingErrorMessage, ARRAY_USERS_COUNT);
+getData((data) => {
+  showServerAd(data);
+  addMapFilterEventListener(
+    data,
+    debounce(
+      showServerAd,
+      RERENDER_DELAY,
+    ));
+}, getDataLoadingErrorMessage);

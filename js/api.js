@@ -1,11 +1,11 @@
-const getData = (pinMap, errorMessage, count) => {
+const getData = (onServerDataLoad, onErrorMessage) => {
   fetch('https://25.javascript.pages.academy/keksobooking/data')
     .then((Response) => Response.json())
-    .then((data) => pinMap(data.slice(0, count)))
-    .catch(() => errorMessage());
+    .then((data) => onServerDataLoad(data))
+    .catch(() => onErrorMessage());
 };
 
-const sendData = (userData, messageState, body) => {
+const sendData = (onUserDataSubmits , onStateMessage, body) => {
   fetch(
     'https://25.javascript.pages.academy/keksobooking',
     {
@@ -13,9 +13,9 @@ const sendData = (userData, messageState, body) => {
       body,
     })
     .then((Response) => Response.json())
-    .then((data) => userData(data))
-    .then(() => messageState('success'))
-    .catch(() => messageState('error'));
+    .then((data) => onUserDataSubmits (data))
+    .then(() => onStateMessage('success'))
+    .catch(() => onStateMessage('error'));
 };
 
 export {getData, sendData};

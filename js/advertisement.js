@@ -1,8 +1,8 @@
-import {getPlaceText, getRoomsText, getGuestsText} from './data.js';
+import {getPlaceText, getRoomsText, getGuestsText} from './util.js';
 
 const popup = document.querySelector('#card').content.querySelector('.popup');
 
-const createServerPopupAdvertisement = (author, offer, location) => {
+const createServerPopup = (author, offer, location) => {
   const popupClone = popup.cloneNode(true);
   popupClone.querySelector('.popup__avatar').src = author.avatar;
   popupClone.querySelector('.popup__title').textContent = offer.title;
@@ -13,24 +13,28 @@ const createServerPopupAdvertisement = (author, offer, location) => {
   popupClone.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
   popupClone.querySelector('.popup__description').textContent = offer.description;
 
-  const photosContainer = popupClone.querySelector('.popup__photos');
-  const photo = photosContainer.querySelector('.popup__photo');
+  const photoContainer = popupClone.querySelector('.popup__photos');
+  const photo = photoContainer.querySelector('.popup__photo');
 
-  if (offer.photos.length === 1) {
-    photo.src = offer.photos;
+  if (offer.photos) {
+    if (offer.photos.length === 1) {
+      photo.src = offer.photos;
+    } else {
+      offer.photos.forEach((value) => {
+        const photoClone = photo.cloneNode(true);
+        photoClone.src = value;
+        photoContainer.append(photoClone);
+        photoContainer.firstChild.remove();
+      });
+    }
   } else {
-    offer.photos.forEach((value) => {
-      const photoClone = photo.cloneNode(true);
-      photoClone.src = value;
-      photosContainer.append(photoClone);
-      photosContainer.firstChild.remove();
-    });
+    photoContainer.remove();
   }
 
   const featureList = popupClone.querySelectorAll('.popup__feature');
   const featureContainer = popupClone.querySelector('.popup__features');
 
-  if (Object.keys(offer).includes('features')) {
+  if (offer.features) {
     const modifiers = offer.features.map((feature) => `popup__feature--${feature}`);
 
     featureList.forEach((featureListItem) => {
@@ -47,14 +51,14 @@ const createServerPopupAdvertisement = (author, offer, location) => {
   return popupClone;
 };
 
-const createUserPopupAdvertisement = (data) => {
+const createUserPopup = (data) => {
   const popupClone = popup.cloneNode(true);
   // popupClone.querySelector('.popup__avatar').src = author.avatar;
   popupClone.querySelector('.popup__title').textContent = data.title;
   popupClone.querySelector('.popup__text--address').textContent = `${data.address}`;
   popupClone.querySelector('.popup__text--price').textContent = `${data.price} ₽/ночь`;
   popupClone.querySelector('.popup__type').textContent = getPlaceText(data.type);
-  popupClone.querySelector('.popup__text--capacity').textContent = `${data.rooms} ${getRoomsText(data.rooms)} для ${data.capacity} ${getGuestsText(data.capacity)}`;
+  popupClone.querySelector('.popup__text--capacity').textContent = `${data.rooms} ${getRoomsText(+data.rooms)} для ${data.capacity} ${getGuestsText(+data.capacity)}`;
   popupClone.querySelector('.popup__text--time').textContent = `Заезд после ${data.timein}, выезд до ${data.timeout}`;
   popupClone.querySelector('.popup__description').textContent = data.description;
   // popupClone.querySelector('.popup__photo').src = offer.photos;
@@ -62,7 +66,7 @@ const createUserPopupAdvertisement = (data) => {
   const featureList = popupClone.querySelectorAll('.popup__feature');
   const featureContainer = popupClone.querySelector('.popup__features');
 
-  if (Object.keys(data).includes('feature')) {
+  if (data.feature) {
     const modifiers = data.feature.map((feature) => `popup__feature--${feature}`);
 
     featureList.forEach((featureListItem) => {
@@ -79,4 +83,4 @@ const createUserPopupAdvertisement = (data) => {
   return popupClone;
 };
 
-export {createServerPopupAdvertisement, createUserPopupAdvertisement};
+export {createServerPopup, createUserPopup};
