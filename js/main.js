@@ -1,5 +1,6 @@
 import './ad-form-validate.js';
 import './slider.js';
+import './upload-file.js';
 
 import {debounce} from './util.js';
 import {RERENDER_DELAY} from './constants.js';

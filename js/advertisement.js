@@ -53,7 +53,7 @@ const createServerPopup = (author, offer, location) => {
 
 const createUserPopup = (data) => {
   const popupClone = popup.cloneNode(true);
-  // popupClone.querySelector('.popup__avatar').src = author.avatar;
+  // popupClone.querySelector('.popup__avatar').src = URL.createObjectURL(data.avatar);
   popupClone.querySelector('.popup__title').textContent = data.title;
   popupClone.querySelector('.popup__text--address').textContent = `${data.address}`;
   popupClone.querySelector('.popup__text--price').textContent = `${data.price} ₽/ночь`;
@@ -61,7 +61,7 @@ const createUserPopup = (data) => {
   popupClone.querySelector('.popup__text--capacity').textContent = `${data.rooms} ${getRoomsText(+data.rooms)} для ${data.capacity} ${getGuestsText(+data.capacity)}`;
   popupClone.querySelector('.popup__text--time').textContent = `Заезд после ${data.timein}, выезд до ${data.timeout}`;
   popupClone.querySelector('.popup__description').textContent = data.description;
-  // popupClone.querySelector('.popup__photo').src = offer.photos;
+  // popupClone.querySelector('.popup__photo').src = URL.createObjectURL(data.images);
 
   const featureList = popupClone.querySelectorAll('.popup__feature');
   const featureContainer = popupClone.querySelector('.popup__features');
