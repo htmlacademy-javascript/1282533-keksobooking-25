@@ -5,7 +5,7 @@ const previewRoomPhoto = document.querySelector('.ad-form__photo');
 
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
-const getPhotoPreview = (photo, preview) => {
+const addPhotoPreviewEventListener = (photo, preview) => {
   photo.addEventListener('change', () => {
     const file = photo.files[0];
     const fileName = file.name.toLowerCase();
@@ -22,5 +22,5 @@ const getPhotoPreview = (photo, preview) => {
   });
 };
 
-getPhotoPreview (avatarChooser, previewAvatar);
-getPhotoPreview (roomPhotoChooser, previewRoomPhoto);
+addPhotoPreviewEventListener (avatarChooser, previewAvatar);
+addPhotoPreviewEventListener (roomPhotoChooser, previewRoomPhoto);
