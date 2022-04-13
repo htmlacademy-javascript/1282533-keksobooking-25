@@ -74,9 +74,8 @@ const advertisementFilter = (data, cb) => {
     const unnecessaryPinMap = document.querySelectorAll('.remove');
     unnecessaryPinMap.forEach((value) => value.remove());
 
-    const leafletPopup = document.querySelector('.leaflet-popup');
-    if (leafletPopup) {
-      leafletPopup.remove();
+    if (document.querySelector('.leaflet-popup')) {
+      document.querySelector('.leaflet-popup').remove();
     }
 
     cb(filteredData);
