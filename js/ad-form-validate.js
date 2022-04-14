@@ -1,5 +1,6 @@
 import {APARTMENT_OPTION} from './constants.js';
 import {showUserAd} from './map.js';
+import {blockSubmitButton} from './util.js';
 import {getStateMessage} from './data.js';
 import {sendData} from './api.js';
 
@@ -82,6 +83,7 @@ adForm.addEventListener('submit', (evt) => {
 
   const isValid = pristine.validate();
   if (isValid) {
+    blockSubmitButton();
     sendData(
       showUserAd,
       getStateMessage,

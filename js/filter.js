@@ -1,4 +1,5 @@
 const mapFilter = document.querySelector('.map__filters');
+const resetButton = document.querySelector('.ad-form__reset');
 
 const serialize = (form) => {
   const selectedValue = {};
@@ -11,8 +12,6 @@ const serialize = (form) => {
   return selectedValue;
 };
 
-const mapFilterValue = serialize(mapFilter);
-
 const enumPrice = {
   any: 'any',
   middle: [10000, 50000],
@@ -20,7 +19,7 @@ const enumPrice = {
   high: [50000, 100000],
 };
 
-const getFilterValue = (evt) => {
+const getFilterValue = (evt, mapFilterValue) => {
   if (evt.target.name === 'housing-type') {
     mapFilterValue.type = evt.target.value;
   }
@@ -83,9 +82,14 @@ const cleanMap = () => {
   }
 };
 
-const addMapFilterEventListener = (data, cb) => mapFilter.addEventListener('change', (evt) => {
-  cb(getFilteredAds(getFilterValue(evt), data));
+const addMapFilterEventListener = (data, cb) => mapFilter.addEventListener('input', (evt) => {
+  cb(getFilteredAds(getFilterValue(evt, serialize(mapFilter)), data));
   cleanMap();
 });
 
-export {addMapFilterEventListener};
+const addResetMapFilterEventListener = (data, cb) => resetButton.addEventListener('click', () => {
+  cleanMap();
+  cb(data);
+});
+
+export {addMapFilterEventListener, addResetMapFilterEventListener};

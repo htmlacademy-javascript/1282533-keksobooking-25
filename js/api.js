@@ -1,11 +1,12 @@
-const getData = (onServerDataLoad, onErrorMessage) => {
+const getData = (onServerDataLoad, onMapFilterLoad, onErrorMessage) => {
   fetch('https://25.javascript.pages.academy/keksobooking/data')
     .then((Response) => Response.json())
     .then((data) => onServerDataLoad(data))
+    .then(() => onMapFilterLoad())
     .catch(() => onErrorMessage());
 };
 
-const sendData = (onUserDataSubmits , onStateMessage, body) => {
+const sendData = (onUserDataSubmits, onStateMessage, body) => {
   fetch(
     'https://25.javascript.pages.academy/keksobooking',
     {
@@ -13,7 +14,7 @@ const sendData = (onUserDataSubmits , onStateMessage, body) => {
       body,
     })
     .then((Response) => Response.json())
-    .then((data) => onUserDataSubmits (data))
+    .then((data) => onUserDataSubmits(data))
     .then(() => onStateMessage('success'))
     .catch(() => onStateMessage('error'));
 };

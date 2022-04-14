@@ -11,10 +11,12 @@ const numberRooms = document.querySelector('#room_number');
 const numberGuests = document.querySelector('#capacity');
 const timeIn = document.querySelector('#timein');
 const timeOut = document.querySelector('#timeout');
-const featureCheckboxs = document.querySelectorAll('.features__checkbox');
+const adFormCheckboxs = document.querySelectorAll('.features__checkbox');
 const previewAvatar = document.querySelector('.ad-form-header__preview').children[0];
 const previewRoomPhoto = document.querySelector('.ad-form__photo');
-
+const mapFiltersArea = document.querySelector('.map__filters');
+const mapFilterCheckboxs = mapFiltersArea.querySelectorAll('[type="checkbox"]');
+const mapFilterSelects = mapFiltersArea.querySelectorAll('select');
 
 const resetPrice = () => {
   slider.noUiSlider.updateOptions({
@@ -45,8 +47,16 @@ const onResetButtonClick = () => {
   previewAvatar.src = 'img/muffin-grey.svg';
   previewRoomPhoto.style.background = '#e4e4de';
 
-  featureCheckboxs.forEach((currentValue) => {
-    currentValue.checked = false;
+  adFormCheckboxs.forEach((element) => {
+    element.checked = false;
+  });
+
+  mapFilterSelects.forEach((element) => {
+    element.value = 'any';
+  });
+
+  mapFilterCheckboxs.forEach((element) => {
+    element.checked = false;
   });
 
   const leafletPopup = document.querySelector('.leaflet-popup');

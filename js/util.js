@@ -54,4 +54,16 @@ function debounce (callback, timeoutDelay = 500) {
   };
 }
 
-export {getPlaceText, getRoomsText, getGuestsText, debounce};
+const submitButton = document.querySelector('.ad-form__submit');
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Публикую...';
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
+};
+
+export {getPlaceText, getRoomsText, getGuestsText, blockSubmitButton, unblockSubmitButton, debounce};

@@ -1,5 +1,5 @@
 const ARRAY_USERS_COUNT = 10;
-const RERENDER_DELAY = 400;
+const RERENDER_DELAY = 500;
 
 const TOKYO = {
   lat: 35.678,
