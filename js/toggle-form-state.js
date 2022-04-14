@@ -1,35 +1,57 @@
-const fieldsets = document.querySelectorAll('fieldset');
-const selects = document.querySelectorAll('select');
-const mapFiltersArea = document.querySelector('.map__filters');
 const adForm = document.querySelector('.ad-form');
+const adFormFieldsets = adForm.querySelectorAll('fieldset');
+const adFormSelects = adForm.querySelectorAll('select');
+
+const mapFiltersArea = document.querySelector('.map__filters');
+const mapFilterFieldset = mapFiltersArea.querySelector('fieldset');
+const mapFilterSelects = mapFiltersArea.querySelectorAll('select');
+
 const slider = adForm.querySelector('.ad-form__slider');
 
-const disablePageForm = () => {
+const disableMapFilterForm = () => {
   mapFiltersArea.classList.add('map__filters--disabled');
-  adForm.classList.add('ad-form--disabled');
-  slider.setAttribute('disabled', 'disabled');
+  mapFilterFieldset.setAttribute('disabled', true);
 
-  fieldsets.forEach((currentValue) => {
-    currentValue.setAttribute('disabled', 'disabled');
-  });
-
-  selects.forEach((currentValue) => {
-    currentValue.setAttribute('disabled', 'disabled');
+  mapFilterSelects.forEach((element) => {
+    element.setAttribute('disabled', true);
   });
 };
 
-const activatePageForm = () => {
+disableMapFilterForm();
+
+const activateMapFilterForm = () => {
   mapFiltersArea.classList.remove('map__filters--disabled');
+  mapFilterFieldset.removeAttribute('disabled');
+
+  mapFilterSelects.forEach((element) => {
+    element.removeAttribute('disabled');
+  });
+};
+
+const disableAdForm = () => {
+  adForm.classList.add('ad-form--disabled');
+  slider.setAttribute('disabled', true);
+
+  adFormFieldsets.forEach((element) => {
+    element.setAttribute('disabled', true);
+  });
+
+  adFormSelects.forEach((element) => {
+    element.setAttribute('disabled', true);
+  });
+};
+
+const activateAdForm = () => {
   adForm.classList.remove('ad-form--disabled');
   slider.removeAttribute('disabled');
 
-  fieldsets.forEach((currentValue) => {
-    currentValue.removeAttribute('disabled');
+  adFormFieldsets.forEach((element) => {
+    element.removeAttribute('disabled');
   });
 
-  selects.forEach((currentValue) => {
-    currentValue.removeAttribute('disabled');
+  adFormSelects.forEach((element) => {
+    element.removeAttribute('disabled');
   });
 };
 
-export {disablePageForm, activatePageForm};
+export {disableAdForm, activateAdForm, activateMapFilterForm};

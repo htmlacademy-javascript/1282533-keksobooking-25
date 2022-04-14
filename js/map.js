@@ -1,13 +1,13 @@
-import {disablePageForm, activatePageForm} from './toggle-form-state.js';
+import {disableAdForm, activateAdForm} from './toggle-form-state.js';
 import {createServerPopup, createUserPopup} from './advertisement.js';
 import {ARRAY_USERS_COUNT, TOKYO} from './constants.js';
 
 const inputAddress = document.querySelector('#address');
 
-disablePageForm();
+disableAdForm();
 
 const map = L.map('map-canvas')
-  .on('load', activatePageForm)
+  .on('load', activateAdForm)
   .setView([TOKYO.lat, TOKYO.lng], 13);
 
 L.tileLayer(

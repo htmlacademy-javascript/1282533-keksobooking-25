@@ -4,10 +4,11 @@ import './upload-file.js';
 
 import {debounce} from './util.js';
 import {RERENDER_DELAY} from './constants.js';
-import {addMapFilterEventListener} from './filter.js';
+import {addMapFilterEventListener, addResetMapFilterEventListener} from './filter.js';
 import {showServerAd} from './map.js';
 import {getDataLoadingErrorMessage} from './data.js';
 import {getData} from './api.js';
+import {activateMapFilterForm} from './toggle-form-state.js';
 
 getData((data) => {
   showServerAd(data);
@@ -17,4 +18,10 @@ getData((data) => {
       showServerAd,
       RERENDER_DELAY,
     ));
-}, getDataLoadingErrorMessage);
+  addResetMapFilterEventListener(
+    data,
+    debounce(
+      showServerAd,
+      RERENDER_DELAY,
+    ));
+}, activateMapFilterForm, getDataLoadingErrorMessage);

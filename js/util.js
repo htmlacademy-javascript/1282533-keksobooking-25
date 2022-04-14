@@ -45,13 +45,25 @@ const getGuestsText = (guests) => {
   return word;
 };
 
-function debounce (callback, timeoutDelay = 500) {
+const debounce = (callback, timeoutDelay = 500) => {
   let timeoutId;
 
   return (...rest) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
-}
+};
 
-export {getPlaceText, getRoomsText, getGuestsText, debounce};
+const submitButton = document.querySelector('.ad-form__submit');
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Публикую...';
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
+};
+
+export {getPlaceText, getRoomsText, getGuestsText, blockSubmitButton, unblockSubmitButton, debounce};

@@ -1,4 +1,5 @@
 const mapFilter = document.querySelector('.map__filters');
+const resetButton = document.querySelector('.ad-form__reset');
 
 const serialize = (form) => {
   const selectedValue = {};
@@ -11,8 +12,6 @@ const serialize = (form) => {
   return selectedValue;
 };
 
-const mapFilterValue = serialize(mapFilter);
-
 const enumPrice = {
   any: 'any',
   middle: [10000, 50000],
@@ -20,39 +19,39 @@ const enumPrice = {
   high: [50000, 100000],
 };
 
-const getFilterValue = (evt) => {
+const getFilterValue = (evt, filterValue) => {
   if (evt.target.name === 'housing-type') {
-    mapFilterValue.type = evt.target.value;
+    filterValue.type = evt.target.value;
   }
   if (evt.target.name === 'housing-price') {
-    mapFilterValue.price = enumPrice[evt.target.value];
+    filterValue.price = enumPrice[evt.target.value];
   }
   if (evt.target.name === 'housing-rooms') {
-    mapFilterValue.rooms = evt.target.value;
+    filterValue.rooms = evt.target.value;
   }
   if (evt.target.name === 'housing-guests') {
-    mapFilterValue.guests = evt.target.value;
+    filterValue.guests = evt.target.value;
   }
 
   if (evt.target.name === 'features') {
     if (evt.target.checked) {
-      if (!mapFilterValue.features) {
-        mapFilterValue.features = [];
+      if (!filterValue.features) {
+        filterValue.features = [];
       }
-      mapFilterValue.features.push(evt.target.value);
+      filterValue.features.push(evt.target.value);
     } else {
-      const index = mapFilterValue.features.indexOf(evt.target.value);
-      mapFilterValue.features.splice(index, 1);
+      const index = filterValue.features.indexOf(evt.target.value);
+      filterValue.features.splice(index, 1);
     }
   }
 
-  if (mapFilterValue.features) {
-    if (mapFilterValue.features.length === 0) {
-      delete mapFilterValue.features;
+  if (filterValue.features) {
+    if (filterValue.features.length === 0) {
+      delete filterValue.features;
     }
   }
 
-  return mapFilterValue;
+  return filterValue;
 };
 
 const getFilteredAds = (filterValue, data) => data.filter(({offer}) => {
@@ -78,14 +77,20 @@ const cleanMap = () => {
   const leafletMarkerIcons = document.querySelectorAll('.remove');
   leafletMarkerIcons.forEach((value) => value.remove());
 
-  if (document.querySelector('.leaflet-popup')) {
-    document.querySelector('.leaflet-popup').remove();
+  const leafletPopup = document.querySelector('.leaflet-popup');
+  if (leafletPopup) {
+    leafletPopup.remove();
   }
 };
 
-const addMapFilterEventListener = (data, cb) => mapFilter.addEventListener('change', (evt) => {
-  cb(getFilteredAds(getFilterValue(evt), data));
+const addMapFilterEventListener = (data, cb) => mapFilter.addEventListener('input', (evt) => {
+  cb(getFilteredAds(getFilterValue(evt, serialize(mapFilter)), data));
   cleanMap();
 });
 
-export {addMapFilterEventListener};
+const addResetMapFilterEventListener = (data, cb) => resetButton.addEventListener('click', () => {
+  cleanMap();
+  cb(data);
+});
+
+export {addMapFilterEventListener, addResetMapFilterEventListener};
