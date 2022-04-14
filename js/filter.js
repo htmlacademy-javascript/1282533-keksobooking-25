@@ -19,39 +19,39 @@ const enumPrice = {
   high: [50000, 100000],
 };
 
-const getFilterValue = (evt, mapFilterValue) => {
+const getFilterValue = (evt, filterValue) => {
   if (evt.target.name === 'housing-type') {
-    mapFilterValue.type = evt.target.value;
+    filterValue.type = evt.target.value;
   }
   if (evt.target.name === 'housing-price') {
-    mapFilterValue.price = enumPrice[evt.target.value];
+    filterValue.price = enumPrice[evt.target.value];
   }
   if (evt.target.name === 'housing-rooms') {
-    mapFilterValue.rooms = evt.target.value;
+    filterValue.rooms = evt.target.value;
   }
   if (evt.target.name === 'housing-guests') {
-    mapFilterValue.guests = evt.target.value;
+    filterValue.guests = evt.target.value;
   }
 
   if (evt.target.name === 'features') {
     if (evt.target.checked) {
-      if (!mapFilterValue.features) {
-        mapFilterValue.features = [];
+      if (!filterValue.features) {
+        filterValue.features = [];
       }
-      mapFilterValue.features.push(evt.target.value);
+      filterValue.features.push(evt.target.value);
     } else {
-      const index = mapFilterValue.features.indexOf(evt.target.value);
-      mapFilterValue.features.splice(index, 1);
+      const index = filterValue.features.indexOf(evt.target.value);
+      filterValue.features.splice(index, 1);
     }
   }
 
-  if (mapFilterValue.features) {
-    if (mapFilterValue.features.length === 0) {
-      delete mapFilterValue.features;
+  if (filterValue.features) {
+    if (filterValue.features.length === 0) {
+      delete filterValue.features;
     }
   }
 
-  return mapFilterValue;
+  return filterValue;
 };
 
 const getFilteredAds = (filterValue, data) => data.filter(({offer}) => {
@@ -77,8 +77,9 @@ const cleanMap = () => {
   const leafletMarkerIcons = document.querySelectorAll('.remove');
   leafletMarkerIcons.forEach((value) => value.remove());
 
-  if (document.querySelector('.leaflet-popup')) {
-    document.querySelector('.leaflet-popup').remove();
+  const leafletPopup = document.querySelector('.leaflet-popup');
+  if (leafletPopup) {
+    leafletPopup.remove();
   }
 };
 

@@ -19,13 +19,13 @@ const getStateMessage = (state) => {
     unblockSubmitButton();
   };
 
-  stateContainer.addEventListener('click', onClickCloseStateContainer);
+  stateContainer.addEventListener('click', onClickCloseStateContainer, {once: true});
 
   document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
       onClickCloseStateContainer();
     }
-  });
+  }, {once: true});
 
   return body.append(stateContainer);
 };
@@ -39,11 +39,11 @@ const getDataLoadingErrorMessage = () => {
 
   continueButton.addEventListener('click', () => {
     errorLoadDataContainer.remove();
-  });
+  }, {once: true});
 
   reloadButton.addEventListener('click', () => {
     location.reload();
-  });
+  }, {once: true});
 
   return body.append(errorLoadDataContainer);
 };

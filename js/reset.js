@@ -18,7 +18,7 @@ const mapFiltersArea = document.querySelector('.map__filters');
 const mapFilterCheckboxs = mapFiltersArea.querySelectorAll('[type="checkbox"]');
 const mapFilterSelects = mapFiltersArea.querySelectorAll('select');
 
-const resetPrice = () => {
+const  getResetPriceSlider = () => {
   slider.noUiSlider.updateOptions({
     range: {
       min: +APARTMENT_OPTION['flat'],
@@ -29,14 +29,31 @@ const resetPrice = () => {
   price.value = +APARTMENT_OPTION['flat'];
 };
 
-const onResetButtonClick = () => {
-  inputAddress.value = `${TOKYO.lat} ${TOKYO.lng}`;
+const getResetMap = () => {
   mainPinMarker.setLatLng({
     lat: TOKYO.lat,
     lng: TOKYO.lng,
   });
   map.setView([TOKYO.lat, TOKYO.lng], 13);
-  resetPrice();
+
+  const leafletPopup = document.querySelector('.leaflet-popup');
+  if (leafletPopup) {
+    leafletPopup.remove();
+  }
+};
+
+const getResetMapFilter = () => {
+  mapFilterSelects.forEach((element) => {
+    element.value = 'any';
+  });
+
+  mapFilterCheckboxs.forEach((element) => {
+    element.checked = false;
+  });
+};
+
+const getResetFormAd = () => {
+  inputAddress.value = `${TOKYO.lat} ${TOKYO.lng}`;
   apartmentType.value = 'flat';
   title.value = '';
   description.value = '';
@@ -46,23 +63,16 @@ const onResetButtonClick = () => {
   timeOut.value = '12:00';
   previewAvatar.src = 'img/muffin-grey.svg';
   previewRoomPhoto.style.background = '#e4e4de';
-
   adFormCheckboxs.forEach((element) => {
     element.checked = false;
   });
+};
 
-  mapFilterSelects.forEach((element) => {
-    element.value = 'any';
-  });
-
-  mapFilterCheckboxs.forEach((element) => {
-    element.checked = false;
-  });
-
-  const leafletPopup = document.querySelector('.leaflet-popup');
-  if (leafletPopup) {
-    leafletPopup.remove();
-  }
+const onResetButtonClick = () => {
+  getResetPriceSlider();
+  getResetMap();
+  getResetFormAd();
+  getResetMapFilter();
 };
 
 resetButton.addEventListener('click', (evt) => {

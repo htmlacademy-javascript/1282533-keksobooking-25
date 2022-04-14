@@ -55,7 +55,7 @@ pristine.addValidator(numberGuests, validateRoom, getRoomsErrorMessage);
 
 const apartmentType = adForm.querySelector('#type');
 
-function apartmentPrice () {
+function getPriceApartment () {
   price.placeholder = APARTMENT_OPTION[apartmentType.value];
   price.min = APARTMENT_OPTION[apartmentType.value];
   return !((price.value < +APARTMENT_OPTION[apartmentType.value]));
@@ -65,7 +65,7 @@ function getPriceErrorMessage () {
   return `Минимальная цена ${APARTMENT_OPTION[apartmentType.value]} руб.`;
 }
 
-pristine.addValidator(apartmentType, apartmentPrice, getPriceErrorMessage);
+pristine.addValidator(apartmentType, getPriceApartment, getPriceErrorMessage);
 
 const timeIn = adForm.querySelector('#timein');
 const timeOut = adForm.querySelector('#timeout');
