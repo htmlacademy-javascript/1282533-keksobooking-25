@@ -9,7 +9,7 @@ const getStateMessage = (state) => {
   const stateTemplate = document.querySelector(`#${state}`).content.querySelector(`.${state}`);
   const stateContainer = stateTemplate.cloneNode(true);
 
-  const onClickCloseStateContainer = () => {
+  const onStateContainerClick = () => {
     stateContainer.remove();
 
     if (`${state}` === 'success') {
@@ -19,11 +19,11 @@ const getStateMessage = (state) => {
     unblockSubmitButton();
   };
 
-  stateContainer.addEventListener('click', onClickCloseStateContainer, {once: true});
+  stateContainer.addEventListener('click', onStateContainerClick, {once: true});
 
   document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
-      onClickCloseStateContainer();
+      onStateContainerClick();
     }
   }, {once: true});
 
