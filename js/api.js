@@ -1,5 +1,7 @@
+import {LINK_TO_GET, LINK_TO_SEND} from './constants.js';
+
 const getData = (onServerDataLoad, onMapFilterLoad, onErrorMessage) => {
-  fetch('https://25.javascript.pages.academy/keksobooking/data')
+  fetch(LINK_TO_GET)
     .then((Response) => Response.json())
     .then((data) => onServerDataLoad(data))
     .then(() => onMapFilterLoad())
@@ -8,7 +10,7 @@ const getData = (onServerDataLoad, onMapFilterLoad, onErrorMessage) => {
 
 const sendData = (onUserDataSubmits, onStateMessage, body) => {
   fetch(
-    'https://25.javascript.pages.academy/keksobooking',
+    LINK_TO_SEND,
     {
       method: 'POST',
       body,
